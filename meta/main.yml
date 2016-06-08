@@ -1,0 +1,20 @@
+galaxy_info:
+  author: Mailo Svetel
+  description: >
+    This role prepares Raspberry PI to be a NFC controller for ITEAD PN532 chip based boards, connected via
+    UART (https://electrosome.com/uart-raspberry-pi-python/)
+  company: Rooland provisioning
+  license: MIT
+  min_ansible_version: 2.0
+
+  platforms:
+    - name: Debian
+      versions:
+        - all
+
+  galaxy_tags:
+    - raspberry_pi
+    - nfc
+    - itead
+    - PN532
+dependencies: []

@@ -1,0 +1,49 @@
+---
+- name: Remove serial0 console
+  replace:
+    dest:     /boot/cmdline.txt
+    regexp:   'console=serial0,115200 '
+    replace:  ''
+    backup:   yes
+  become: yes
+
+- name: Install system packages
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  become: yes
+  with_items:
+    - bzr
+    - libnfc-bin
+    - libnfc-dev
+    - libfreefare-bin
+    - libfreefare-dev
+    - python-dev
+
+- name: Configure libnfc
+  copy:
+    src: nfc
+    dest: /etc/nfc
+  become: yes
+
+- name: Install pip packages
+  pip:
+    name:   "{{ item }}"
+    state:  present
+  become: yes
+  with_items:
+    - pyserial
+    - libusb1
+
+- name: Prepare directories for projects
+  file:
+    dest:   "~/Projects/nfc/{{ item.dir_name }}/"
+    state:  directory
+  with_items:
+    - dir_name: python
+    - dir_name: ruby
+
+- name: Clone NFC.py
+  bzr:
+    name: 'lp:nfcpy'
+    dest: ~/Projects/python/nfcpy
