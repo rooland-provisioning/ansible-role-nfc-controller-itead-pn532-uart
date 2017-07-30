@@ -39,4 +39,4 @@ BSD
 ## Author Information
 
 - Usually idling on Freenode as lipoqil
-- http://him.rlnd.cz
+- http://mailo.svetel.cz
